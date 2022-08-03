@@ -98,6 +98,7 @@ function mymul(A::CuArray, B::CuArray)
     B .= 3.0
     mul2_kernel(CUDADevice(), 16)(A, ndrange=size(A))
     mul2_kernel(CUDADevice(), 16)(A, ndrange=size(A))
+    synchronize(CUDADevice())
     all(A .+ B .== 8.0)
 end
 ```
